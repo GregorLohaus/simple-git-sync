@@ -39,7 +39,7 @@ export default class MyPlugin extends Plugin {
 		let d = new Date()
 		if (adapter instanceof FileSystemAdapter && (d.getTime() - this.loadtime.getTime())/1000 > 60 && (d.getTime() - this.lastpush.getTime())/1000 > 60) {
 			this.spawnProcess("git",["add","."])
-			this.spawnProcess("git",["commit","-m",`${file.name}@${d.toDateString().replace(" ","-")}`])
+			this.spawnProcess("git",["commit","-m",`${file.name}@${d.toUTCString()}`])
 			this.spawnProcess("git",["push",this.settings.remote,this.settings.branch])
 			this.lastpush = new Date();
 		}
